@@ -10,20 +10,28 @@ echo preg_replace($patterns, $replace, $str);
 echo '<br><br><br>2.<br>';
 
 $string = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+$newString;
 
-// $vowels = array ('/a/','/e/','/i/','/o/','/u/',);
+$vowels = ('/[aeiou]/');
+// $vowels = ('/a/');
 
 $words = array();
 $words = preg_split('/ /', trim($string));
 
-echo '<pre>';
-var_dump($words);
-echo '</pre>';
+// echo '<pre>';
+// var_dump($words);
+// echo '</pre>';
 
-foreach ($words as $word) {
+foreach ($words as $key => $word) {
 	// $counter = count(preg_match_all($vowels, $word));
-	if(preg_match_all("aeiou", $word, $matches) !== 0) {
-
-	echo $matches;
+	if(preg_match_all($vowels, $word, $matches) !== 0) {
+		foreach ($matches as $match) {
+				if ((count($match) % 2) == 0) {
+					$newString = $newString . ' ' . $word;
+				}
+				unset($word);
+		}
 	}
+
 }
+echo $newString;
